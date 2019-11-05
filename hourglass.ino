@@ -14,12 +14,17 @@ Adafruit_LIS3DH lis = Adafruit_LIS3DH();
 
 Adafruit_IS31FL3731 ledmatrix = Adafruit_IS31FL3731();
 
+long startmillis;
+long duration = 1000 * 10;
+
 void setup() {
   Serial.begin(9600);
   delay(100);
 
   _initAccel();
   _initLed();
+
+  startmillis = millis();
 }
 
 void loop() {
@@ -30,7 +35,12 @@ void loop() {
 
   _drawHourglassShape();
 
-  delay(100);
+  float progress = (float) (millis() - startmillis) / duration;
+  if (progress > 1.0) {
+    progress = 1;
+  }
+  Serial.println(progress);
+  delay(1000);
 }
 
 void _initAccel() {
