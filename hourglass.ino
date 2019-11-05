@@ -24,6 +24,12 @@ void setup() {
 
 void loop() {
   _getOrientation();
+
+  ledmatrix.setRotation(1);
+  ledmatrix.clear();
+
+  _drawHourglassShape();
+
   delay(100);
 }
 
@@ -73,4 +79,19 @@ void _initLed() {
     yield();
   }
   Serial.println("IS31 found!");
+}
+
+
+void _drawHourglassShape() {
+  int shapeBrightness = 72;
+  ledmatrix.drawFastHLine(0, 0, 9, shapeBrightness);
+  ledmatrix.drawFastVLine(0, 0, 3, shapeBrightness);
+  ledmatrix.drawFastVLine(8, 0, 3, shapeBrightness);
+  ledmatrix.drawLine(0, 3, 4, 7, shapeBrightness);
+  ledmatrix.drawLine(8, 3, 4, 7, shapeBrightness);
+  ledmatrix.drawLine(0, 12, 4, 8, shapeBrightness);
+  ledmatrix.drawLine(8, 12, 4, 8, shapeBrightness);
+  ledmatrix.drawFastVLine(0, 13, 3, shapeBrightness);
+  ledmatrix.drawFastVLine(8, 13, 3, shapeBrightness);
+  ledmatrix.drawFastHLine(0, 15, 9, shapeBrightness);
 }
