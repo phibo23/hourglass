@@ -1,6 +1,12 @@
 #include <Adafruit_LIS3DH.h>
 
 Adafruit_LIS3DH lis = Adafruit_LIS3DH();
+#define FLAT_UP 0
+#define FLAT_DOWN 1
+#define PORTRAIT_UP 2
+#define PORTRAIT_DOWN 3
+#define LANDSCAPE_LEFT 4
+#define LANDSCAPE_RIGHT 5
 
 void setup() {
   Serial.begin(9600);
@@ -10,6 +16,8 @@ void setup() {
 }
 
 void loop() {
+  _getOrientation();
+  delay(100);
 }
 
 /**
@@ -27,4 +35,29 @@ void _initAccel() {
 
   Serial.print("Range = "); Serial.print(2 << lis.getRange());
   Serial.println("G");
+}
+
+int _getOrientation() {
+  sensors_event_t event;
+  lis.getEvent(&event);
+
+  float x, y, z;
+  x = event.acceleration.x;
+  y = event.acceleration.y;
+  z = event.acceleration.z;
+
+  if (z > 9) {
+    return FLAT_UP;
+  } else if (z < -9) {
+    return FLAT_DOWN;
+  } else if (x < -9) {
+    return LANDSCAPE_LEFT;
+  } else if (x > 9) {
+    return LANDSCAPE_RIGHT;
+  } else if (y < -9) {
+    return PORTRAIT_UP;
+  } else if (y > 9) {
+    return PORTRAIT_DOWN;
+  }
+  return -1;
 }
