@@ -8,11 +8,18 @@ Adafruit_LIS3DH lis = Adafruit_LIS3DH();
 #define LANDSCAPE_LEFT 4
 #define LANDSCAPE_RIGHT 5
 
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_IS31FL3731.h>
+
+Adafruit_IS31FL3731 ledmatrix = Adafruit_IS31FL3731();
+
 void setup() {
   Serial.begin(9600);
   delay(100);
 
   _initAccel();
+  _initLed();
 }
 
 void loop() {
@@ -20,9 +27,6 @@ void loop() {
   delay(100);
 }
 
-/**
- * https://github.com/adafruit/Adafruit_LIS3DH/blob/master/examples/acceldemo/acceldemo.ino
- */
 void _initAccel() {
   Serial.println("LIS3DH test!");
   while (!lis.begin(0x18)) {   // change this to 0x19 for alternative i2c address
@@ -60,4 +64,13 @@ int _getOrientation() {
     return PORTRAIT_DOWN;
   }
   return -1;
+}
+
+void _initLed() {
+  Serial.println("IS31 test");
+  while (! ledmatrix.begin()) {
+    Serial.println("IS31 not found");
+    yield();
+  }
+  Serial.println("IS31 found!");
 }
