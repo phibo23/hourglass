@@ -97,14 +97,14 @@ void _initLed() {
 void _drawHourglassShape() {
   #define shapeBrightness 72
   ledmatrix.drawFastHLine(0, 0, 9, shapeBrightness);
-  ledmatrix.drawFastVLine(0, 0, 3, shapeBrightness);
-  ledmatrix.drawFastVLine(8, 0, 3, shapeBrightness);
-  ledmatrix.drawLine(0, 3, 4, 7, shapeBrightness);
-  ledmatrix.drawLine(8, 3, 4, 7, shapeBrightness);
-  ledmatrix.drawLine(0, 12, 4, 8, shapeBrightness);
-  ledmatrix.drawLine(8, 12, 4, 8, shapeBrightness);
-  ledmatrix.drawFastVLine(0, 13, 3, shapeBrightness);
-  ledmatrix.drawFastVLine(8, 13, 3, shapeBrightness);
+  ledmatrix.drawFastVLine(0, 0, 4, shapeBrightness);
+  ledmatrix.drawFastVLine(8, 0, 4, shapeBrightness);
+  ledmatrix.drawLine(0, 4, 3, 7, shapeBrightness);
+  ledmatrix.drawLine(8, 4, 5, 7, shapeBrightness);
+  ledmatrix.drawLine(0, 11, 3, 8, shapeBrightness);
+  ledmatrix.drawLine(8, 11, 5, 8, shapeBrightness);
+  ledmatrix.drawFastVLine(0, 12, 4, shapeBrightness);
+  ledmatrix.drawFastVLine(8, 12, 4, shapeBrightness);
   ledmatrix.drawFastHLine(0, 15, 9, shapeBrightness);
 }
 
