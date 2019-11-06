@@ -110,17 +110,16 @@ void _drawHourglassShape() {
 
 void _drawSand(float progress) {
   #define sandBrightness 32
-  #define EULER 2.718281828459045235360287471352
   if (progress < 1) {
     // upper
-    // triangle flows through neck -> exponentially decrease height
-    int upperTop = 3 + 4 * pow(EULER, 3 * progress - 3);
+    // triangle flows through neck
+    int upperTop = 3 + 4 * pow(progress, 1.5);
     int upperLeft = upperTop / 2;
     int upperRight = 8 - upperTop / 2;
     ledmatrix.fillTriangle(upperLeft, upperTop, upperRight, upperTop, 4, 7, sandBrightness);
     // lower
-    // triangle grows -> logarithmic increase height 
-    int lowerTop = 15 - 4 * ((1.0/2.0) * log(progress) + 1);
+    // triangle grows
+    int lowerTop = 15 - 4 * pow(progress, 1.0/1.5);
     int lowerBottom = lowerTop + 4;
     ledmatrix.fillTriangle(0, lowerBottom, 8, lowerBottom, 4, lowerTop, sandBrightness);
     // stream
